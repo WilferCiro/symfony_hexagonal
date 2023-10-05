@@ -1,0 +1,19 @@
+services:
+    
+    App\User\Infrastructure\sql\:
+        resource: '../src/User/Infrastructure/sql/*'
+        autowire: true
+        autoconfigure: true
+
+    App\User\Application\:
+        resource: '../src/User/Application/*'
+        autowire: true
+        autoconfigure: true
+        tags: ['controller.service_arguments']
+
+    App\User\Infrastructure\Controller\:
+        resource: '../src/User/Infrastructure/Controller/*'
+        autowire: true
+        autoconfigure: true
+        tags: ['controller.service_arguments']
+    
