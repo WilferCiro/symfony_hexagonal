@@ -33,7 +33,14 @@ class UserController extends AbstractController
     #[Route('/users', name: 'user_paginated', methods: ['GET'])]
     public function getPaginated(#[MapQueryString] ?PaginationQueryDto $query,): Response
     {
-        $user = $this->userService->getById(1);
-        return $this->json($user);
+        $user = $this->userService->getPaginated(1, 20);
+        return $this->json($user->toDto());
+    }
+
+    #[Route('/users', name: 'user_create', methods: ['POST'])]
+    public function create(#[MapQueryString] ?PaginationQueryDto $query,): Response
+    {
+        $user = $this->userService->getPaginated(1, 20);
+        return $this->json($user->toDto());
     }
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\User\Domain\model;
+namespace App\Product\Domain\model;
 
-class User
+class Product
 {
     private $id;
     private $firstName;
@@ -29,5 +29,8 @@ class User
         ];
     }
 
-    // Other methods related to the User entity, e.g., validation, business logic, etc.
+    // Other methods related to the Product entity, e.g., validation, business logic, etc.
+    public function update($product) {
+        $this->firstName = $product["firstName"];
+    }
 }

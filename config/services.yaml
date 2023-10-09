@@ -17,3 +17,20 @@ services:
         autoconfigure: true
         tags: ['controller.service_arguments']
     
+    App\Product\Infrastructure\sql\:
+        resource: '../src/Product/Infrastructure/sql/*'
+        autowire: true
+        autoconfigure: true
+
+    App\Product\Application\:
+        resource: '../src/Product/Application/*'
+        autowire: true
+        autoconfigure: true
+        tags: ['controller.service_arguments']
+
+    App\Product\Infrastructure\Controller\:
+        resource: '../src/Product/Infrastructure/Controller/*'
+        autowire: true
+        autoconfigure: true
+        tags: ['controller.service_arguments']
+    

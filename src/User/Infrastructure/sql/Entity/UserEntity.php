@@ -29,4 +29,9 @@ class UserEntity
         $user = new User($this->id, $this->firstName, $this->lastName, $this->email, $this->password);
         return $user;
     }
+
+    public static function toDomainParams($user):?User {
+        $user = new User($user["id"], $user["firstName"], $user["lastName"], $user["email"], $user["password"]);
+        return $user;
+    }
 }

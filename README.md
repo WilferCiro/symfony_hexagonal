@@ -55,7 +55,7 @@ php bin/console doctrine:migrations:migrate
 5. **Inicia el Servidor de Desarrollo:**
 
 ```bash
-symfony serve
+symfony serve --no-lts
 ```
 
 Ahora puedes acceder a la aplicación en http://localhost:8000.

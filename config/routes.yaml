@@ -1,5 +1,11 @@
-controllers:
+user_controller:
     resource:
         path: ../src/User/Infrastructure/Controller/
         namespace: App\User\Infrastructure\Controller
+    type: attribute
+
+product_controller:
+    resource:
+        path: ../src/Product/Infrastructure/Controller/
+        namespace: App\Product\Infrastructure\Controller
     type: attribute

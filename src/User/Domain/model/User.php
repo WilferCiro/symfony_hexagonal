@@ -30,4 +30,7 @@ class User
     }
 
     // Other methods related to the User entity, e.g., validation, business logic, etc.
+    public function update($user) {
+        $this->firstName = $user["firstName"];
+    }
 }
