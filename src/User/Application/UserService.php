@@ -3,15 +3,15 @@
 namespace App\User\Application;
 
 use App\Shared\Domain\Utils\PaginatorDomain;
+use App\User\Domain\interfaces\UserRepositoryInterface;
 use App\User\Domain\interfaces\UserServiceInterface;
-use App\User\Infrastructure\sql\UserRepository;
 use App\User\Domain\model\User;
 
 class UserService implements UserServiceInterface
 {
     private $userRepository;
 
-    public function __construct(UserRepository $userRepository)
+    public function __construct(UserRepositoryInterface $userRepository)
     {
         $this->userRepository = $userRepository;
     }

@@ -7,15 +7,17 @@ services:
 
     App\User\Application\:
         resource: '../src/User/Application/*'
-        autowire: true
-        autoconfigure: true
         tags: ['controller.service_arguments']
+        arguments:
+            $userRepository: '@App\User\Infrastructure\sql\UserRepository'
 
     App\User\Infrastructure\Controller\:
         resource: '../src/User/Infrastructure/Controller/*'
-        autowire: true
-        autoconfigure: true
         tags: ['controller.service_arguments']
+        calls:
+            - [setContainer, ["@service_container"]]
+        arguments:
+            $userService: '@App\User\Application\UserService'
     
     App\Product\Infrastructure\sql\:
         resource: '../src/Product/Infrastructure/sql/*'
@@ -24,13 +26,15 @@ services:
 
     App\Product\Application\:
         resource: '../src/Product/Application/*'
-        autowire: true
-        autoconfigure: true
         tags: ['controller.service_arguments']
+        arguments:
+            $productRepository: '@App\Product\Infrastructure\sql\ProductRepository'
 
     App\Product\Infrastructure\Controller\:
         resource: '../src/Product/Infrastructure/Controller/*'
-        autowire: true
-        autoconfigure: true
         tags: ['controller.service_arguments']
+        calls:
+            - [setContainer, ["@service_container"]]
+        arguments:
+            $productService: '@App\Product\Application\ProductService'
     

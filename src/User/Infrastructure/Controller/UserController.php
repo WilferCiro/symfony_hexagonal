@@ -1,9 +1,9 @@
 <?php
 namespace App\User\Infrastructure\Controller;
 
-use App\User\Application\UserService;
 use App\Shared\Infrastructure\DTO\PaginationQueryDto;
 
+use App\User\Domain\interfaces\UserServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,7 +13,7 @@ class UserController extends AbstractController
 {
     private $userService;
 
-    public function __construct(UserService $userService)
+    public function __construct(UserServiceInterface $userService)
     {
         $this->userService = $userService;
     }
@@ -38,9 +38,9 @@ class UserController extends AbstractController
     }
 
     #[Route('/users', name: 'user_create', methods: ['POST'])]
-    public function create(#[MapQueryString] ?PaginationQueryDto $query,): Response
+    public function create( $body,): Response
     {
-        $user = $this->userService->getPaginated(1, 20);
+        $user = $this->userService->create($body);
         return $this->json($user->toDto());
     }
 }

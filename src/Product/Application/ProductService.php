@@ -2,16 +2,16 @@
 
 namespace App\Product\Application;
 
+use App\Product\Domain\interfaces\ProductRepositoryInterface;
 use App\Shared\Domain\Utils\PaginatorDomain;
 use App\Product\Domain\interfaces\ProductServiceInterface;
-use App\Product\Infrastructure\sql\ProductRepository;
 use App\Product\Domain\model\Product;
 
 class ProductService implements ProductServiceInterface
 {
     private $productRepository;
 
-    public function __construct(ProductRepository $productRepository)
+    public function __construct(ProductRepositoryInterface $productRepository)
     {
         $this->productRepository = $productRepository;
     }

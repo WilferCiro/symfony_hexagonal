@@ -1,0 +1,2 @@
+parameters:
+    app.user_repository: 'App\User\Infrastructure\sql\UserRepository'

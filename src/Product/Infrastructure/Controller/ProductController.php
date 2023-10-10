@@ -1,7 +1,7 @@
 <?php
 namespace App\Product\Infrastructure\Controller;
 
-use App\Product\Application\ProductService;
+use App\Product\Domain\interfaces\ProductServiceInterface;
 use App\Shared\Infrastructure\DTO\PaginationQueryDto;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,7 +13,7 @@ class ProductController extends AbstractController
 {
     private $productService;
 
-    public function __construct(ProductService $productService)
+    public function __construct(ProductServiceInterface $productService)
     {
         $this->productService = $productService;
     }

@@ -25,7 +25,7 @@ class PaginatorRepository
         $this->lastPage = (int) ceil($paginator->count() / $paginator->getQuery()->getMaxResults());
         $data =  $paginator->getQuery()->getArrayResult();
         
-         $this->data = array();
+        $this->data = array();
         foreach($data as $dt) {
             array_push($this->data, $class_alias::toDomainParams($dt));
         }
