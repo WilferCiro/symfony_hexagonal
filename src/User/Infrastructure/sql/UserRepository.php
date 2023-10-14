@@ -10,6 +10,7 @@ use App\User\Domain\interfaces\UserRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityNotFoundException;
 use App\Shared\Infrastructure\Utils\PaginatorRepository;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class UserRepository extends BaseRepository implements UserRepositoryInterface
 {
@@ -25,7 +26,16 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     {
         $user = $this->entityManager->getRepository(UserEntity::class)->find($id);
         if (!$user) {
-            throw new EntityNotFoundException('No existe el usuario');
+            return $this->throwNotFoundException();
+        }
+        return $user->toDomain();
+    }
+
+    public function getByEmail(string $email): ?User
+    {
+        $user = $this->entityManager->getRepository(UserEntity::class)->findOneBy(["email" => $email]);
+        if (!$user) {
+            return $this->throwNotFoundException();
         }
         return $user->toDomain();
     }

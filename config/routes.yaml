@@ -9,3 +9,9 @@ product_controller:
         path: ../src/Product/Infrastructure/Controller/
         namespace: App\Product\Infrastructure\Controller
     type: attribute
+
+auth_controller:
+    resource:
+        path: ../src/Auth/Infrastructure/Controller/
+        namespace: App\Auth\Infrastructure\Controller
+    type: attribute

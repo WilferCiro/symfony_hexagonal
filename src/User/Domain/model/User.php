@@ -19,6 +19,14 @@ class User
         $this->password = $password;
     }
 
+    public function checkPassword(string $password) {
+        return $this->password == $password;
+    }
+
+    public function getId() {
+        return $this->id;
+    }
+
     public function toDto()
     {
         return [

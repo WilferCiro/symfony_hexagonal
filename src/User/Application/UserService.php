@@ -20,6 +20,15 @@ class UserService implements UserServiceInterface
         return $this->userRepository->getById($id);
     }
 
+    public function checkLogin($email, $password): ?User
+    {
+        $user = $this->userRepository->getByEmail($email);
+        if ($user->checkPassword($password)) {
+            return $user;
+        }
+        return null;
+    }
+
     public function getPaginated(int $page, int $quantity): ?PaginatorDomain
     {
         return $this->userRepository->getPaginated($page, $quantity);

@@ -8,6 +8,8 @@ use App\User\Domain\Model\User;
 interface UserRepositoryInterface
 {
     public function getById(int $id): ?User;
+
+    public function getByEmail(string $email): ?User;
     public function getPaginated(int $page, int $quantity): ?PaginatorDomain;
     public function create(User $user): ?User;
     public function update(int $id, User $user): ?User;

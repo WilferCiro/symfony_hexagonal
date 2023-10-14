@@ -8,7 +8,6 @@ use App\Product\Infrastructure\sql\Entity\ProductEntity;
 use App\Product\Domain\model\Product;
 use App\Product\Domain\interfaces\ProductRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityNotFoundException;
 use App\Shared\Infrastructure\Utils\PaginatorRepository;
 
 class ProductRepository extends BaseRepository implements ProductRepositoryInterface
@@ -25,7 +24,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
     {
         $product = $this->entityManager->getRepository(ProductEntity::class)->find($id);
         if (!$product) {
-            throw new EntityNotFoundException('No existe el producto');
+            $this->throwNotFoundException();
         }
         return $product->toDomain();
     }

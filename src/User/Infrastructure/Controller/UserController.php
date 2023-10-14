@@ -17,28 +17,23 @@ class UserController extends AbstractController
     {
         $this->userService = $userService;
     }
-    
+
     #[Route('/users/{id}', name: 'user_by_id', methods: ['GET'])]
     public function getById(int $id): Response
     {
-        try {
-            $user = $this->userService->getById($id);
-            return $this->json($user->toDto());
-        } catch (\Throwable $th) {
-            echo $th->getCode();
-            return $this->json(["Error" => "Error"]);
-        }
+        $user = $this->userService->getById($id);
+        return $this->json($user->toDto());
     }
 
     #[Route('/users', name: 'user_paginated', methods: ['GET'])]
-    public function getPaginated(#[MapQueryString] ?PaginationQueryDto $query,): Response
+    public function getPaginated(#[MapQueryString] ?PaginationQueryDto $query, ): Response
     {
         $user = $this->userService->getPaginated(1, 20);
         return $this->json($user->toDto());
     }
 
     #[Route('/users', name: 'user_create', methods: ['POST'])]
-    public function create( $body,): Response
+    public function create($body, ): Response
     {
         $user = $this->userService->create($body);
         return $this->json($user->toDto());

@@ -1,4 +1,7 @@
 services:
+
+    App\Shared\Infrastructure\Controllers\ErrorController:
+        tags: ['controller.service_arguments']
     
     App\User\Infrastructure\sql\:
         resource: '../src/User/Infrastructure/sql/*'
@@ -38,3 +41,24 @@ services:
         arguments:
             $productService: '@App\Product\Application\ProductService'
     
+    
+    
+    App\Auth\Infrastructure\Repository\:
+        resource: '../src/Auth/Infrastructure/Repository/*'
+        autowire: true
+        autoconfigure: true
+
+    App\Auth\Application\:
+        resource: '../src/Auth/Application/*'
+        tags: ['controller.service_arguments']
+        arguments:
+            $userService: '@App\User\Application\UserService'
+            $authRepository: '@App\Auth\Infrastructure\Repository\AuthRepository'
+
+    App\Auth\Infrastructure\Controller\:
+        resource: '../src/Auth/Infrastructure/Controller/*'
+        tags: ['controller.service_arguments']
+        calls:
+            - [setContainer, ["@service_container"]]
+        arguments:
+            $authService: '@App\Auth\Application\AuthService'
