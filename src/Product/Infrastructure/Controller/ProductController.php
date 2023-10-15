@@ -2,7 +2,7 @@
 namespace App\Product\Infrastructure\Controller;
 
 use App\Product\Domain\interfaces\ProductServiceInterface;
-use App\Shared\Infrastructure\DTO\PaginationQueryDto;
+use App\Shared\Infrastructure\Dto\PaginationQueryDto;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;

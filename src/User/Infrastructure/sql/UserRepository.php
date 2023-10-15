@@ -8,9 +8,7 @@ use App\User\Infrastructure\sql\Entity\UserEntity;
 use App\User\Domain\model\User;
 use App\User\Domain\interfaces\UserRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityNotFoundException;
 use App\Shared\Infrastructure\Utils\PaginatorRepository;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class UserRepository extends BaseRepository implements UserRepositoryInterface
 {
@@ -49,15 +47,23 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     }
     public function create(User $user): ?User
     {
-        $this->entityManager->persist($user);
+        $userBD = new UserEntity();
+        $userBD->setFirstName($user->getFirstName());
+        $userBD->setLastName($user->getLastName());
+        $userBD->setEmail($user->getEmail());
+        $userBD->setPassword($user->getPassword());
+        $this->entityManager->persist($userBD);
         $this->entityManager->flush();
-        return $user;
+        return $userBD->toDomain();
     }
     public function update(int $id, User $user): ?User
     {
-        $existent = $this->getById($id);
-        $existent->update($user);
+        $userDB = $this->entityManager->getRepository(UserEntity::class)->find($id);
+        if (!$userDB) {
+            return $this->throwNotFoundException();
+        }
+        $userDB->update($user);
         $this->entityManager->flush();
-        return $user;
+        return $userDB->toDomain();
     }
 }

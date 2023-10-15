@@ -10,7 +10,7 @@ class User
     private $email;
     private $password;
 
-    public function __construct($id, $firstName, $lastName, $email, $password)
+    public function __construct($firstName, $lastName, $email, $password = null, $id = null)
     {
         $this->id = $id;
         $this->firstName = $firstName;
@@ -19,11 +19,13 @@ class User
         $this->password = $password;
     }
 
-    public function checkPassword(string $password) {
+    public function checkPassword(string $password)
+    {
         return $this->password == $password;
     }
 
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
@@ -37,8 +39,21 @@ class User
         ];
     }
 
-    // Other methods related to the User entity, e.g., validation, business logic, etc.
-    public function update($user) {
-        $this->firstName = $user["firstName"];
+    // Getters
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+    public function getLastName()
+    {
+        return $this->lastName;
+    }
+    public function getEmail()
+    {
+        return $this->email;
+    }
+    public function getPassword()
+    {
+        return $this->password;
     }
 }
