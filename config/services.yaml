@@ -1,13 +1,17 @@
+
 services:
 
-    App\Shared\Infrastructure\Controllers\ErrorController:
-        tags: ['controller.service_arguments']
-    
-    App\User\Infrastructure\sql\:
-        resource: '../src/User/Infrastructure/sql/*'
-        autowire: true
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true
 
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/**/Entity/'
+            - '../src/Kernel.php'
+    
+    ## USER
     App\User\Application\:
         resource: '../src/User/Application/*'
         tags: ['controller.service_arguments']
@@ -22,11 +26,7 @@ services:
         arguments:
             $userService: '@App\User\Application\UserService'
     
-    App\Product\Infrastructure\sql\:
-        resource: '../src/Product/Infrastructure/sql/*'
-        autowire: true
-        autoconfigure: true
-
+    ## PRODUCT
     App\Product\Application\:
         resource: '../src/Product/Application/*'
         tags: ['controller.service_arguments']
@@ -41,13 +41,7 @@ services:
         arguments:
             $productService: '@App\Product\Application\ProductService'
     
-    
-    
-    App\Auth\Infrastructure\Repository\:
-        resource: '../src/Auth/Infrastructure/Repository/*'
-        autowire: true
-        autoconfigure: true
-
+    ## AUTH
     App\Auth\Application\:
         resource: '../src/Auth/Application/*'
         tags: ['controller.service_arguments']
